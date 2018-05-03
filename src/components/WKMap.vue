@@ -1,5 +1,5 @@
 <template>
-  <l-map :zoom="zoom" :center="center">
+  <l-map ref="map" :zoom="zoom" :center="center" v-on:moveend="onMoveEnd">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
     <v-marker-cluster :options="clusterOptions" v-if="jobs.length !== 0">
       <l-marker v-for="job in jobs" v-if="job._geoloc !== null" :lat-lng="job._geoloc">
@@ -13,7 +13,6 @@
 import L from 'leaflet';
 import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
-import * as algoliasearch from 'algoliasearch';
 import iconRetinaUrl from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from '../../node_modules/leaflet/dist/images/marker-icon.png';
 import shadowUrl from '../../node_modules/leaflet/dist/images/marker-shadow.png';
@@ -35,9 +34,9 @@ export default {
     LPopup,
     'v-marker-cluster': Vue2LeafletMarkerCluster,
   },
+  props: ['jobs'],
   data() {
     return {
-      jobs: [],
       zoom: 13,
       center: L.latLng(48.8566, 2.3522),
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
@@ -48,20 +47,22 @@ export default {
     };
   },
   methods: {
-    async loadJobs() {
-      const client = algoliasearch('CSEKHVMS53', 'YmUwMzBiNjg3MDY4M2M3MGJiNGNkODdiOTZmOTZjZTZlMzA3NDZiZGZhM2VkY2NjMjY1OWEwMzhjMWI5M2IwMmZpbHRlcnM9d2Vic2l0ZV9pZHMlM0ExODc');
-      const index = client.initIndex('wk_jobs_production');
-
-      const res = await index.search({
-        query: '',
-        hitsPerPage: 1000,
-      });
-
-      this.jobs = res.hits;
+    onMoveEnd() {
+      this.updateJobs();
+    },
+    updateJobs() {
+      const bounds = this.$refs.map.mapObject.getBounds();
+      const box = [
+        bounds._northEast.lat,
+        bounds._northEast.lng,
+        bounds._southWest.lat,
+        bounds._southWest.lng,
+      ];
+      this.$emit('update:jobs', box);
     },
   },
-  beforeMount() {
-    this.loadJobs();
+  mounted() {
+    this.updateJobs();
   },
 };
 </script>
