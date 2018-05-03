@@ -25,7 +25,7 @@ export default {
 
       const res = await index.search({
         query: '',
-        hitsPerPage: 1000,
+        hitsPerPage: 5000,
         insideBoundingBox: [box],
       });
 
