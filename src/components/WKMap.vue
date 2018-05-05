@@ -2,7 +2,11 @@
   <l-map ref="map" :zoom="zoom" :center="center" v-on:moveend="onMoveEnd">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
     <v-marker-cluster :options="clusterOptions" v-if="jobs.length !== 0">
-      <l-marker v-for="job in jobs" v-if="job._geoloc !== null" :lat-lng="job._geoloc">
+      <l-marker
+        v-for="job in jobs"
+        v-if="job._geoloc !== null"
+        :key="job.objectID"
+        :lat-lng="job._geoloc">
         <l-popup :content="job.company_name + ': ' + job.name"></l-popup>
       </l-marker>
     </v-marker-cluster>
