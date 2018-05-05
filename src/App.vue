@@ -31,7 +31,7 @@ export default {
 
       const res = await this.$options.index.search({
         query: '',
-        hitsPerPage: 5000,
+        hitsPerPage: 1000,
         insideBoundingBox: [this.jobBox],
         attributesToRetrieve: [
           '_geoloc',
