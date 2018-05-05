@@ -48,9 +48,9 @@ export default {
   },
   methods: {
     onMoveEnd() {
-      this.updateJobs();
+      this.emitMapMove();
     },
-    updateJobs() {
+    emitMapMove() {
       const bounds = this.$refs.map.mapObject.getBounds();
       const box = [
         bounds._northEast.lat,
@@ -58,11 +58,11 @@ export default {
         bounds._southWest.lat,
         bounds._southWest.lng,
       ];
-      this.$emit('update:jobs', box);
+      this.$emit('mapMove', box);
     },
   },
   mounted() {
-    this.updateJobs();
+    this.emitMapMove();
   },
 };
 </script>

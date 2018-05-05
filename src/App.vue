@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <WKMap v-bind:jobs="jobs" v-on:update:jobs="updateJobs" />
+    <WKMap id="map" v-bind:jobs="jobs" v-on:mapMove="updateJobs" />
   </div>
 </template>
 
