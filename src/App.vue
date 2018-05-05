@@ -38,6 +38,7 @@ export default {
           'company_name',
           'name',
         ],
+        analytics: false,
       });
 
       this.jobs = res.hits;
