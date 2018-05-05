@@ -27,6 +27,11 @@ export default {
         query: '',
         hitsPerPage: 5000,
         insideBoundingBox: [box],
+        attributesToRetrieve: [
+          '_geoloc',
+          'company_name',
+          'name',
+        ],
       });
 
       this.jobs = res.hits;
