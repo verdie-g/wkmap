@@ -10,6 +10,7 @@ import 'buefy/lib/buefy.css';
 import * as algoliasearch from 'algoliasearch';
 import Buefy from 'buefy';
 import Vue from 'vue';
+import Vuex from 'vuex';
 import VueMoment from 'vue-moment';
 import 'moment/locale/fr';
 
@@ -19,6 +20,7 @@ import { growBox, containsBox } from './helpers/BoxHelper';
 
 Vue.use(Buefy);
 Vue.use(VueMoment);
+Vue.use(Vuex);
 
 export default {
   name: 'App',
