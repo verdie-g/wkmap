@@ -18,7 +18,7 @@
           </li>
           <li>
             <b-icon icon="clock" size="is-small" />
-            <time>{{job.published_at}}</time>
+            <time>{{job.published_at | moment('from') }}</time>
           </li>
         </ul>
       </div>
@@ -60,14 +60,14 @@ export default {
 }
 
 .job-header h4 {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-weight: normal;
 }
 
 .job-header h5 {
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-weight: normal;
 }
 
