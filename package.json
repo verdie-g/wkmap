@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "algoliasearch": "^3.27.1",
+    "buefy": "^0.6.5",
     "vue": "^2.5.2",
     "vue2-leaflet": "^1.0.2",
     "vue2-leaflet-markercluster": "^2.0.0"
