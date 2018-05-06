@@ -5,8 +5,22 @@
         <img v-bind:src="job.company_logo_url" />
       </div>
       <div class="job-header column">
-        <h5 class="title">{{job.company_name}}</h5>
-        <h4 class="title">{{job.name}}</h4>
+        <h5 class="title is-size-7 has-text-grey">{{job.company_name}}</h5>
+        <h4 class="title is-size-6">{{job.name}}</h4>
+        <ul class="job-metas list-inline is-size-7">
+          <li>
+            <b-icon icon="briefcase" size="is-small" />
+            <span>{{job.contract_type.fr}}</span>
+          </li>
+          <li>
+            <b-icon icon="map-marker-outline" size="is-small" />
+            <span>{{job.office_city}}</span>
+          </li>
+          <li>
+            <b-icon icon="clock" size="is-small" />
+            <time>{{job.published_at}}</time>
+          </li>
+        </ul>
       </div>
     </li>
   </ul>
@@ -22,12 +36,12 @@ export default {
 
 <style scoped>
 .job-list {
-  overflow: auto;
+  overflow-y: scroll;
   list-style-type: none;
 }
 
 .job {
-  height: 70px;
+  height: 90px;
   cursor: pointer;
 }
 
@@ -39,18 +53,25 @@ export default {
 }
 
 .job-picture img {
-  height: 46px;
+  height: 66px;
 }
 
 .job-header {
 }
 
 .job-header h4 {
-  font-size: 16px;
+  margin-bottom: 5px;
+  font-weight: normal;
 }
 
 .job-header h5 {
-  font-size: 13px;
-  margin-bottom: 3px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-weight: normal;
+}
+
+.job-metas li {
+  margin-right: 6px;
 }
 </style>

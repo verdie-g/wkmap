@@ -7,10 +7,14 @@
 
 <script>
 import 'buefy/lib/buefy.css';
+import Vue from 'vue';
+import Buefy from 'buefy';
 import * as algoliasearch from 'algoliasearch';
 import JobList from './components/JobList';
 import WKMap from './components/WKMap';
 import { growBox, containsBox } from './helpers/BoxHelper';
+
+Vue.use(Buefy);
 
 export default {
   name: 'App',
@@ -39,9 +43,13 @@ export default {
         insideBoundingBox: [this.jobBox],
         attributesToRetrieve: [
           '_geoloc',
-          'company_name',
           'company_logo_url',
+          'company_name',
+          'contract_type.fr',
           'name',
+          'office_city',
+          'published_at',
+          'websites_url',
         ],
         analytics: false,
       });
@@ -53,10 +61,17 @@ export default {
 </script>
 
 <style>
+html {
+  overflow: visible;
+}
+
 html, body, #app {
   width: 100%;
   height: 100%;
   margin: 0;
 }
 
+ul.list-inline li {
+  display: inline-block;
+}
 </style>
