@@ -5,3 +5,11 @@ export function updateJobsBox(state, jobsBox) {
 export async function getJobs(state, jobs) {
   state.jobs = jobs;
 }
+
+export function updateMapViewport(state, viewport) {
+  state.mapViewport = viewport;
+}
+
+export function updateMapCenter(state, center) {
+  state.mapCenter = center;
+}

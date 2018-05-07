@@ -12,6 +12,7 @@ export default new Vuex.Store({
     jobs: [],
     jobsBox: null,
     mapViewport: null,
+    mapCenter: null,
     index: algoliasearch('CSEKHVMS53', 'YmUwMzBiNjg3MDY4M2M3MGJiNGNkODdiOTZmOTZjZTZlMzA3NDZiZGZhM2VkY2NjMjY1OWEwMzhjMWI5M2IwMmZpbHRlcnM9d2Vic2l0ZV9pZHMlM0ExODc').initIndex('wk_jobs_production'),
   },
   mutations,

@@ -1,6 +1,6 @@
 <template>
-  <ul v-if="jobs.length !== 0" class="job-list">
-    <li v-for="job in jobs.slice(0, $options.nbJobs)" class="job columns">
+  <ul v-if="jobs.length !== 0 && mapCenter !== null" class="job-list">
+    <li v-for="job in sortedJobs" class="job columns">
       <div class="job-picture column is-narrow">
         <img v-bind:src="job.company_logo_url" />
       </div>
@@ -28,6 +28,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { sortByDistance } from '../helpers/GeoHelper';
 
 export default {
   name: 'JobList',
@@ -35,7 +36,14 @@ export default {
   computed: {
     ...mapState([
       'jobs',
+      'mapCenter',
+      'mapViewport',
     ]),
+    sortedJobs() {
+      const viewportJobs = this.jobs.filter(j => this.mapViewport.contains(j._geoloc));
+      return sortByDistance(this.mapCenter, viewportJobs, j => j._geoloc)
+        .slice(0, this.$options.nbJobs);
+    },
   },
 };
 </script>

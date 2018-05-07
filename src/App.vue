@@ -6,11 +6,9 @@
 </template>
 
 <script>
-import * as algoliasearch from 'algoliasearch';
 import { mapState, mapActions } from 'vuex';
 import JobList from './components/JobList';
 import WKMap from './components/WKMap';
-import { growBox, containsBox } from './helpers/BoxHelper';
 
 export default {
   name: 'App',
@@ -30,11 +28,11 @@ export default {
       'getJobs',
     ]),
     updateJobs(viewport) {
-      if (this.jobsBox !== null && containsBox(this.jobsBox, viewport)) {
+      if (this.jobsBox !== null && this.jobsBox.contains(viewport)) {
         return;
       }
 
-      this.updateJobsBox(growBox(viewport, 0.05));
+      this.updateJobsBox(viewport.pad(0.05));
       this.getJobs('');
     },
   },
