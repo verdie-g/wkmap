@@ -46,5 +46,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'no-mixed-operators': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'import/prefer-default-export': 'off',
   },
 };

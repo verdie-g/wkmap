@@ -1,6 +1,6 @@
 <template>
   <ul v-if="jobs.length !== 0 && mapCenter !== null" class="job-list">
-    <li v-for="job in sortedJobs" class="job columns">
+    <li v-for="job in sortedJobs" :key="job.objectID" class="job columns">
       <div class="job-picture column is-narrow">
         <img v-bind:src="job.company_logo_url" />
       </div>
