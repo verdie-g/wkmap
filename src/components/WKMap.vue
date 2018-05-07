@@ -6,7 +6,7 @@
         v-for="job in jobs"
         v-if="job._geoloc !== null"
         :key="job.objectID"
-        :lat-lng="job._geoloc">
+        :lat-lng="{ lat: job._geoloc.lat, lng: job._geoloc.lng }">
         <l-popup :content="job.company_name + ': ' + job.name"></l-popup>
       </l-marker>
     </v-marker-cluster>
