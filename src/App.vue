@@ -1,55 +1,41 @@
 <template>
   <div id="app" class="columns">
-    <JobList id="job-list" class="column is-one-quarter" v-bind:jobs="jobs" />
-    <WKMap id="map" class="column" v-bind:jobs="jobs" v-on:mapMove="updateJobs" />
+    <JobList id="job-list" class="column is-one-quarter" />
+    <WKMap id="map" class="column" v-on:mapMove="updateJobs" />
   </div>
 </template>
 
 <script>
 import * as algoliasearch from 'algoliasearch';
+import { mapState, mapActions } from 'vuex';
 import JobList from './components/JobList';
 import WKMap from './components/WKMap';
 import { growBox, containsBox } from './helpers/BoxHelper';
 
 export default {
   name: 'App',
-  index: algoliasearch('CSEKHVMS53', 'YmUwMzBiNjg3MDY4M2M3MGJiNGNkODdiOTZmOTZjZTZlMzA3NDZiZGZhM2VkY2NjMjY1OWEwMzhjMWI5M2IwMmZpbHRlcnM9d2Vic2l0ZV9pZHMlM0ExODc').initIndex('wk_jobs_production'),
   components: {
     JobList,
     WKMap,
   },
-  data() {
-    return {
-      jobBox: null,
-      jobs: [],
-    };
+  computed: {
+    ...mapState([
+      'jobs',
+      'jobsBox',
+    ]),
   },
   methods: {
-    async updateJobs(box) {
-      if (this.jobBox !== null && containsBox(this.jobBox, box)) {
+    ...mapActions([
+      'updateJobsBox',
+      'getJobs',
+    ]),
+    updateJobs(viewport) {
+      if (this.jobsBox !== null && containsBox(this.jobsBox, viewport)) {
         return;
       }
 
-      this.jobBox = growBox(box, 0.05);
-
-      const res = await this.$options.index.search({
-        query: '',
-        hitsPerPage: 1000,
-        insideBoundingBox: [this.jobBox],
-        attributesToRetrieve: [
-          '_geoloc',
-          'company_logo_url',
-          'company_name',
-          'contract_type.fr',
-          'name',
-          'office_city',
-          'published_at',
-          'websites_url',
-        ],
-        analytics: false,
-      });
-
-      this.jobs = res.hits;
+      this.updateJobsBox(growBox(viewport, 0.05));
+      this.getJobs('');
     },
   },
 };

@@ -16,6 +16,7 @@
 <script>
 import L from 'leaflet';
 import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
+import { mapState } from 'vuex';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 import iconRetinaUrl from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from '../../node_modules/leaflet/dist/images/marker-icon.png';
@@ -38,7 +39,6 @@ export default {
     LPopup,
     'v-marker-cluster': Vue2LeafletMarkerCluster,
   },
-  props: ['jobs'],
   data() {
     return {
       zoom: 13,
@@ -49,6 +49,11 @@ export default {
         maxClusterRadius: 25,
       },
     };
+  },
+  computed: {
+    ...mapState([
+      'jobs',
+    ]),
   },
   methods: {
     onMoveEnd() {

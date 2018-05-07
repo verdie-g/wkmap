@@ -27,10 +27,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'JobList',
   nbJobs: 20,
-  props: ['jobs'],
+  computed: {
+    ...mapState([
+      'jobs',
+    ]),
+  },
 };
 </script>
 
