@@ -1,3 +1,5 @@
+import { jobsIndex } from '../api';
+
 export function updateJobsBox({ commit }, jobsBox) {
   commit('updateJobsBox', jobsBox);
 }
@@ -10,7 +12,7 @@ export async function getJobs({ commit, state }, query) {
     state.jobsBox.getSouthWest().lng,
   ];
 
-  const res = await state.index.search({
+  const res = await jobsIndex.search({
     query,
     hitsPerPage: 1000,
     insideBoundingBox: [boundingBox],

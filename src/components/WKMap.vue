@@ -15,7 +15,7 @@
 
 <script>
 import L from 'leaflet';
-import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LPopup, LRectangle } from 'vue2-leaflet';
 import { mapState, mapActions } from 'vuex';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 import iconRetinaUrl from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
@@ -37,6 +37,7 @@ export default {
     LTileLayer,
     LMarker,
     LPopup,
+    LRectangle,
     'v-marker-cluster': Vue2LeafletMarkerCluster,
   },
   data() {
@@ -64,11 +65,10 @@ export default {
     },
     emitMapMove() {
       const map = this.$refs.map.mapObject;
-
       const viewport = map.getBounds();
-      const center = map.getCenter();
+      const center = viewport.getCenter();
       this.updateMapPositions({ viewport, center });
-      this.$emit('mapMove', viewport);
+      this.$emit('mapMove');
     },
   },
   mounted() {

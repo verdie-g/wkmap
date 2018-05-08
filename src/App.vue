@@ -20,6 +20,7 @@ export default {
     ...mapState([
       'jobs',
       'jobsBox',
+      'mapViewport',
     ]),
   },
   methods: {
@@ -27,12 +28,12 @@ export default {
       'updateJobsBox',
       'getJobs',
     ]),
-    updateJobs(viewport) {
-      if (this.jobsBox !== null && this.jobsBox.contains(viewport)) {
+    updateJobs() {
+      if (this.jobsBox !== null && this.jobsBox.contains(this.mapViewport)) {
         return;
       }
 
-      this.updateJobsBox(viewport.pad(0.05));
+      this.updateJobsBox(this.mapViewport.pad(0.3));
       this.getJobs('');
     },
   },
@@ -48,6 +49,13 @@ html, body, #app {
   width: 100%;
   height: 100%;
   margin: 0;
+}
+
+#map {
+  position: absolute;
+  left: 25%;
+  right: 0;
+  width: 75%;
 }
 
 ul.list-inline li {

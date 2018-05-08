@@ -1,5 +1,5 @@
-export function sortByDistance(coordRef, array, geoProj) {
-  return array.map((e, i) => ({ index: i, dist: coordRef.distanceTo(geoProj(e)) }))
+export function sortByDistance(coordRef, data, geoProj) {
+  return data.map((e, i) => ({ index: i, dist: coordRef.distanceTo(geoProj(e)) }))
     .sort((a, b) => a.dist - b.dist)
-    .map(e => array[e.index]);
+    .map(e => data[e.index]);
 }
