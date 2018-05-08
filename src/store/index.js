@@ -14,6 +14,7 @@ export default new Vuex.Store({
     jobsBox: null,
     mapViewport: null,
     mapCenter: null,
+    query: '',
   },
   actions,
   getters,

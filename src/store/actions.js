@@ -1,10 +1,12 @@
 import { jobsIndex } from '../api';
 
-export function updateJobsBox({ commit }, jobsBox) {
-  commit('updateJobsBox', jobsBox);
-}
+export async function updateJobs({ commit, state }) {
+  if (state.jobsBox !== null && state.jobsBox.contains(state.mapViewport)) {
+    return;
+  }
 
-export async function getJobs({ commit, state }, query) {
+  commit('updateJobsBox', state.mapViewport.pad(0.3));
+
   const boundingBox = [
     state.jobsBox.getNorthEast().lat,
     state.jobsBox.getNorthEast().lng,
@@ -13,7 +15,7 @@ export async function getJobs({ commit, state }, query) {
   ];
 
   const res = await jobsIndex.search({
-    query,
+    query: state.query,
     hitsPerPage: 1000,
     insideBoundingBox: [boundingBox],
     attributesToRetrieve: [

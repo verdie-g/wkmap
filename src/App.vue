@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import JobList from './components/JobList';
 import WKMap from './components/WKMap';
 
@@ -17,25 +17,11 @@ export default {
     WKMap,
   },
   computed: {
-    ...mapState([
-      'jobs',
-      'jobsBox',
-      'mapViewport',
-    ]),
   },
   methods: {
     ...mapActions([
-      'updateJobsBox',
-      'getJobs',
+      'updateJobs',
     ]),
-    updateJobs() {
-      if (this.jobsBox !== null && this.jobsBox.contains(this.mapViewport)) {
-        return;
-      }
-
-      this.updateJobsBox(this.mapViewport.pad(0.3));
-      this.getJobs('');
-    },
   },
 };
 </script>
