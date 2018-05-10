@@ -1,6 +1,7 @@
 <template>
-  <l-map ref="map" :zoom="zoom" :center="center" v-on:moveend="onMoveEnd">
-    <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+  <l-map ref="map" :zoom="zoom" :center="center" :options="mapOptions" v-on:moveend="onMoveEnd">
+    <l-tile-layer :url="url" :attribution="attribution" />
+    <l-control-zoom position="bottomleft"></l-control-zoom>
     <v-marker-cluster :options="clusterOptions" v-if="jobs.length !== 0">
       <l-marker
         v-for="job in jobs"
@@ -15,7 +16,7 @@
 
 <script>
 import L from 'leaflet';
-import { LMap, LTileLayer, LMarker, LPopup, LRectangle } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LPopup, LControlZoom } from 'vue2-leaflet';
 import { mapState, mapActions } from 'vuex';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 import iconRetinaUrl from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
@@ -37,7 +38,7 @@ export default {
     LTileLayer,
     LMarker,
     LPopup,
-    LRectangle,
+    LControlZoom,
     'v-marker-cluster': Vue2LeafletMarkerCluster,
   },
   data() {
@@ -46,6 +47,9 @@ export default {
       center: L.latLng(48.8566, 2.3522),
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      mapOptions: {
+        zoomControl: false,
+      },
       clusterOptions: {
         maxClusterRadius: 25,
       },

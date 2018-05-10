@@ -1,19 +1,24 @@
 <template>
   <div id="app" class="columns">
     <JobList id="job-list" class="column is-one-quarter" />
-    <WKMap id="map" class="column" v-on:mapMove="updateJobs" />
+    <div class="column is-paddingless">
+      <Search id="search" />
+      <WKMap id="map" class="column" v-on:mapMove="updateJobs" />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import JobList from './components/JobList';
+import Search from './components/Search';
 import WKMap from './components/WKMap';
 
 export default {
   name: 'App',
   components: {
     JobList,
+    Search,
     WKMap,
   },
   computed: {
