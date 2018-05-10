@@ -5,7 +5,7 @@ export async function updateJobs({ commit, state }) {
     return;
   }
 
-  commit('updateJobsBox', state.mapViewport.pad(0.3));
+  commit('updateJobsBox', state.mapViewport.pad(0.5));
 
   const boundingBox = [
     state.jobsBox.getNorthEast().lat,
