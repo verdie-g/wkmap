@@ -3,7 +3,7 @@
     <JobList id="job-list" class="column is-one-quarter" />
     <div class="column is-paddingless">
       <Search id="search" />
-      <WKMap id="map" class="column" v-on:mapMove="updateJobs" />
+      <WKMap id="map" v-on:mapMove="updateJobs" />
     </div>
   </div>
 </template>
