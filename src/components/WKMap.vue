@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'updateMapPositions',
+      'updateMapViewport',
     ]),
     onMoveEnd() {
       this.emitMapMove();
@@ -66,8 +66,7 @@ export default {
     emitMapMove() {
       const map = this.$refs.map.mapObject;
       const viewport = map.getBounds();
-      const center = viewport.getCenter();
-      this.updateMapPositions({ viewport, center });
+      this.updateMapViewport(viewport);
       this.$emit('mapMove');
     },
   },

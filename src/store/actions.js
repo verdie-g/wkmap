@@ -34,7 +34,6 @@ export async function updateJobs({ commit, state }) {
   commit('getJobs', res.hits);
 }
 
-export function updateMapPositions({ commit }, { viewport, center }) {
+export function updateMapViewport({ commit }, viewport) {
   commit('updateMapViewport', viewport);
-  commit('updateMapCenter', center);
 }

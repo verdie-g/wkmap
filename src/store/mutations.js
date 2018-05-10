@@ -9,7 +9,3 @@ export async function getJobs(state, jobs) {
 export function updateMapViewport(state, viewport) {
   state.mapViewport = viewport;
 }
-
-export function updateMapCenter(state, center) {
-  state.mapCenter = center;
-}
