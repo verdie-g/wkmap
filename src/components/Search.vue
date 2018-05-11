@@ -9,53 +9,29 @@
       </refinement-list-dropdown>
     </li>
     <li class="column facet-item">
-      <b-dropdown>
+      <refinement-list-dropdown :search-store="searchStore" attribute-name="contract_type.fr">
         <h3 class="title is-size-6" slot="trigger">
           Contrat
           <b-icon icon="menu-down"></b-icon>
         </h3>
-
-        <b-dropdown-item custom>
-          <b-checkbox>CDI</b-checkbox>
-        </b-dropdown-item>
-        <b-dropdown-item custom>
-          <b-checkbox>Stage</b-checkbox>
-        </b-dropdown-item>
-        <b-dropdown-item custom>
-          <b-checkbox>Alternance</b-checkbox>
-        </b-dropdown-item>
-        <b-dropdown-item custom>
-          <b-checkbox>CDD / Temporaire</b-checkbox>
-        </b-dropdown-item>
-        <b-dropdown-item custom>
-          <b-checkbox>Freelance</b-checkbox>
-        </b-dropdown-item>
-        <b-dropdown-item custom>
-          <b-checkbox>VIE</b-checkbox>
-        </b-dropdown-item>
-        <b-dropdown-item custom>
-          <b-checkbox>Temps partiel</b-checkbox>
-        </b-dropdown-item>
-      </b-dropdown>
+      </refinement-list-dropdown>
     </li>
     <li class="column facet-item">
-      <b-dropdown>
+      <refinement-list-dropdown :search-store="searchStore" attribute-name="office_district.fr">
         <h3 class="title is-size-6" slot="trigger">
           Localisation
           <b-icon icon="menu-down"></b-icon>
         </h3>
-
-        <b-dropdown-item custom>
-          <b-checkbox>Paris</b-checkbox>
-        </b-dropdown-item>
-      </b-dropdown>
+      </refinement-list-dropdown>
     </li>
+    <!--
     <li class="column facet-item">
       <h3 class="title is-size-6">Professions</h3>
     </li>
     <li class="column facet-item">
       <h3 class="title is-size-6">Autres</h3>
     </li>
+    -->
   </ul>
 </template>
 
@@ -95,6 +71,7 @@ export default {
 .facet-item h3 {
   text-transform: uppercase;
   font-weight: normal;
+  line-height: 60px;
 }
 
 .facet-item .dropdown {

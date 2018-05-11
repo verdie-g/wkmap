@@ -1,20 +1,20 @@
 <template>
   <b-dropdown>
-    <slot name="trigger">
-    </slot>
+    <template slot="trigger">
+      <slot name="trigger">
+      </slot>
+    </template>
 
     <b-dropdown-item v-for="facet in facetValues" :key="facet.name" custom>
-      <label :class="bem('label')">
-        <input type="checkbox"
-               :class="bem('checkbox')"
-               v-model="facet.isRefined"
-               @change="toggleRefinement(facet)"
-               :value="facet.name" />
+      <b-checkbox v-model="facet.isRefined"
+                  :class="bem('label')"
+                  :native-value="facet.name"
+                  @input="toggleRefinement(facet)">
         <slot :count="facet.count" :active="facet.isRefined" :value="facet.name">
           <span :class="bem('value')">{{facet.name}}</span>
-          <span :class="bem('count')">{{facet.count}}</span>
+          <b-tag rounded :class="bem('count')" class="is-primary">{{facet.count}}</b-tag>
         </slot>
-      </label>
+      </b-checkbox>
     </b-dropdown-item>
   </b-dropdown>
 </template>
