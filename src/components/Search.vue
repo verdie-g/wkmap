@@ -16,14 +16,6 @@
         </h3>
       </refinement-list-dropdown>
     </li>
-    <li class="column facet-item">
-      <refinement-list-dropdown :search-store="searchStore" attribute-name="office_district.fr">
-        <h3 class="title is-size-6" slot="trigger">
-          Localisation
-          <b-icon icon="menu-down"></b-icon>
-        </h3>
-      </refinement-list-dropdown>
-    </li>
     <!--
     <li class="column facet-item">
       <h3 class="title is-size-6">Professions</h3>
