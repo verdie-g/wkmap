@@ -7,7 +7,7 @@
           <b-tag rounded class="is-primary" v-if="facetRefinedCount !== 0">
             {{facetRefinedCount}}
           </b-tag>
-          <b-icon icon="menu-down"></b-icon>
+          <b-icon icon="chevron-down"></b-icon>
         </h3>
       </refinement-list-dropdown>
     </li>
@@ -18,7 +18,7 @@
           <b-tag rounded class="is-primary" v-if="facetRefinedCount !== 0">
             {{facetRefinedCount}}
           </b-tag>
-          <b-icon icon="menu-down"></b-icon>
+          <b-icon icon="chevron-down"></b-icon>
         </h3>
       </refinement-list-dropdown>
     </li>
@@ -85,6 +85,10 @@ export default {
 <style>
 .facet-item .dropdown-trigger {
   cursor: pointer;
+}
+
+.facet-item .dropdown-trigger .icon {
+  vertical-align: middle;
 }
 
 .facet-item .dropdown-content {
