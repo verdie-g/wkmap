@@ -36,8 +36,10 @@
 </template>
 
 <script>
-import { jobsSearchStore } from '../api';
+import { createJobsSearchStore } from '../api';
 import RefinementListDropdown from './ais/RefinementListDropdown';
+
+const searchStore = createJobsSearchStore();
 
 export default {
   name: 'Search',
@@ -46,7 +48,7 @@ export default {
   },
   data() {
     return {
-      searchStore: jobsSearchStore,
+      searchStore,
     };
   },
   mounted() {

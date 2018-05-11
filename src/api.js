@@ -8,7 +8,14 @@ const jobsIndexName = 'wk_jobs_production';
 
 const client = algoliasearch(appId, apiKey);
 
-export const jobsIndex = client.initIndex(jobsIndexName);
-export const jobsSearchStore = createFromAlgoliaClient(client);
+function createSearchStore(indexName) {
+  const searchStore = createFromAlgoliaClient(client);
+  searchStore.indexName = indexName;
+  return searchStore;
+}
 
-jobsSearchStore.indexName = jobsIndexName;
+export const jobsIndex = client.initIndex(jobsIndexName);
+
+export function createJobsSearchStore() {
+  return createSearchStore(jobsIndexName);
+}
