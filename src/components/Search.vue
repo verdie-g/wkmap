@@ -52,6 +52,7 @@ export default {
   mounted() {
     this.searchStore.start();
     this.searchStore.refresh();
+    console.log(this.searchStore);
   },
 };
 </script>

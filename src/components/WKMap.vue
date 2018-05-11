@@ -2,7 +2,7 @@
   <l-map ref="map" :zoom="zoom" :center="center" :options="mapOptions" v-on:moveend="onMoveEnd">
     <l-tile-layer :url="url" :attribution="attribution" />
     <l-control-zoom position="bottomleft"></l-control-zoom>
-    <v-marker-cluster :options="clusterOptions" v-if="jobs.length !== 0">
+    <l-marker-cluster :options="clusterOptions" v-if="jobs.length !== 0">
       <l-marker
         v-for="job in jobs"
         v-if="job._geoloc !== null"
@@ -10,7 +10,7 @@
         :lat-lng="{ lat: job._geoloc.lat, lng: job._geoloc.lng }">
         <l-popup :content="job.company_name + ': ' + job.name"></l-popup>
       </l-marker>
-    </v-marker-cluster>
+    </l-marker-cluster>
   </l-map>
 </template>
 
@@ -18,7 +18,7 @@
 import L from 'leaflet';
 import { LMap, LTileLayer, LMarker, LPopup, LControlZoom } from 'vue2-leaflet';
 import { mapState, mapActions } from 'vuex';
-import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
+import LMarkerCluster from 'vue2-leaflet-markercluster';
 import iconRetinaUrl from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from '../../node_modules/leaflet/dist/images/marker-icon.png';
 import shadowUrl from '../../node_modules/leaflet/dist/images/marker-shadow.png';
@@ -39,7 +39,7 @@ export default {
     LMarker,
     LPopup,
     LControlZoom,
-    'v-marker-cluster': Vue2LeafletMarkerCluster,
+    LMarkerCluster,
   },
   data() {
     return {
