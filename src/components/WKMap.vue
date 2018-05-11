@@ -75,9 +75,16 @@ export default {
     },
     zoomOnJob(job) {
       const map = this.$refs.map.mapObject;
-      const latLngs = [L.latLng(job._geoloc.lat, job._geoloc.lng)];
-      const bounds = L.latLngBounds(latLngs);
-      map.fitBounds(bounds);
+      const latLng = L.latLng(job._geoloc.lat, job._geoloc.lng);
+      map.flyTo(latLng, 17, {
+        pan: {
+          animate: true,
+          duration: 0.5,
+        },
+        zoom: {
+          animate: true,
+        },
+      });
     },
   },
   created() {
