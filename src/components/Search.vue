@@ -2,16 +2,22 @@
   <ul class="search-facets columns">
     <li class="column facet-item">
       <refinement-list-dropdown :search-store="searchStore" attribute-name="universes.name">
-        <h3 class="title is-size-6" slot="trigger">
-          Univers
+        <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetRefinedCount }">
+          <span>Univers</span>
+          <b-tag rounded class="is-primary" v-if="facetRefinedCount !== 0">
+            {{facetRefinedCount}}
+          </b-tag>
           <b-icon icon="menu-down"></b-icon>
         </h3>
       </refinement-list-dropdown>
     </li>
     <li class="column facet-item">
       <refinement-list-dropdown :search-store="searchStore" attribute-name="contract_type.fr">
-        <h3 class="title is-size-6" slot="trigger">
-          Contrat
+        <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetRefinedCount }">
+          <span>Contrat</span>
+          <b-tag rounded class="is-primary" v-if="facetRefinedCount !== 0">
+            {{facetRefinedCount}}
+          </b-tag>
           <b-icon icon="menu-down"></b-icon>
         </h3>
       </refinement-list-dropdown>

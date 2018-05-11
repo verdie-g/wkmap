@@ -1,7 +1,7 @@
 <template>
   <b-dropdown>
     <template slot="trigger">
-      <slot name="trigger">
+      <slot name="trigger" v-bind:facetRefinedCount="facetRefinedCount">
       </slot>
     </template>
 
@@ -24,5 +24,10 @@ import { RefinementList } from 'vue-instantsearch';
 
 export default {
   extends: RefinementList,
+  computed: {
+    facetRefinedCount() {
+      return this.facetValues.reduce((count, facet) => count + facet.isRefined, 0);
+    },
+  },
 };
 </script>
