@@ -74,12 +74,8 @@ export default {
   line-height: 60px;
 }
 
-.facet-item .dropdown {
-  width: 100%;
-  height: 100%;
-}
-
-.facet-item, .facet-item .dropdown-menu {
+.facet-item,
+.facet-item .dropdown-menu {
   z-index: 1000;
   background-color: #fff;
 }
@@ -87,19 +83,14 @@ export default {
 
 <style>
 .facet-item .dropdown-trigger {
-  width: 100%;
   cursor: pointer;
 }
 
-.facet-item .dropdown-menu {
-  padding-top: 0;
-}
-
 .facet-item .dropdown-content {
-  border-radius: 0;
+  text-align: left;
 }
 
-.facet-item .dropdown-item {
-  text-align: left;
+.facet-item .control-label {
+  white-space: nowrap;
 }
 </style>
