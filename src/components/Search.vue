@@ -42,7 +42,7 @@ import RefinementListDropdown from './ais/RefinementListDropdown';
 export default {
   name: 'Search',
   components: {
-    'refinement-list-dropdown': RefinementListDropdown,
+    RefinementListDropdown,
   },
   data() {
     return {
