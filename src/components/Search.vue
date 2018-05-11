@@ -81,6 +81,7 @@ export default {
 
 .facet-item, .facet-item .dropdown-menu {
   z-index: 1000;
+  background-color: #fff;
 }
 </style>
 

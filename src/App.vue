@@ -2,8 +2,8 @@
   <div id="app" class="columns">
     <JobList id="job-list" class="column is-one-quarter" />
     <div class="column is-paddingless">
-      <Search id="search" />
       <WKMap id="map" v-on:mapMove="updateJobs" />
+      <Search id="search" />
     </div>
   </div>
 </template>
