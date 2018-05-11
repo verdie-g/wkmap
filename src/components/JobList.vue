@@ -1,6 +1,9 @@
 <template>
   <ul v-if="sortedJobs.length !== 0" class="job-list">
-    <li v-for="job in sortedJobs" :key="job.objectID" class="job columns">
+    <li v-for="job in sortedJobs"
+        :key="job.objectID"
+        class="job columns"
+        @click="selectJob(job)">
       <div class="job-picture column is-narrow">
         <img v-bind:src="job.company_logo_url" />
       </div>
@@ -38,6 +41,11 @@ export default {
     ]),
     sortedJobs() {
       return this.jobsSortedByDistance.slice(0, this.$options.nbJobs);
+    },
+  },
+  methods: {
+    selectJob(job) {
+      this.$root.$emit('select-job', job);
     },
   },
 };

@@ -73,9 +73,21 @@ export default {
       this.updateMapViewport(viewport);
       this.$emit('mapMove');
     },
+    zoomOnJob(job) {
+      const map = this.$refs.map.mapObject;
+      const latLngs = [L.latLng(job._geoloc.lat, job._geoloc.lng)];
+      const bounds = L.latLngBounds(latLngs);
+      map.fitBounds(bounds);
+    },
+  },
+  created() {
+    this.$root.$on('select-job', this.zoomOnJob);
   },
   mounted() {
     this.emitMapMove();
+  },
+  beforeDestroy() {
+    this.$root.$off('select-job', this.zoomOnJob);
   },
 };
 </script>
