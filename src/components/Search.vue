@@ -67,6 +67,7 @@ export default {
   text-align: center;
   padding: 0;
   height: 100%;
+  border-left: 1px solid #EEEEEE;
 }
 
 .facet-item h3 {
