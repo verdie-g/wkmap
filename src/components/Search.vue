@@ -55,7 +55,6 @@ const professions = {
     { name: 'business', label: 'Business' },
     { name: 'consulting', label: 'Consulting' },
     { name: 'design', label: 'Design' },
-    { name: 'finance', label: 'Finance' },
     { name: 'marketing', label: 'Marketing' },
     { name: 'retail', label: 'Retail' },
     { name: 'tech', label: 'Tech' },
