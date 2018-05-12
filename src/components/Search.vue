@@ -2,10 +2,10 @@
   <ul class="search-facets columns">
     <li class="column facet-item">
       <refinement-list-dropdown :search-store="searchStore" attribute-name="universes.name">
-        <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetRefinedCount }">
+        <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetsRefinedCount }">
           <span>Univers</span>
-          <b-tag rounded class="is-primary" v-if="facetRefinedCount !== 0">
-            {{facetRefinedCount}}
+          <b-tag rounded class="is-primary" v-if="facetsRefinedCount !== 0">
+            {{facetsRefinedCount}}
           </b-tag>
           <b-icon icon="chevron-down"></b-icon>
         </h3>
@@ -13,22 +13,30 @@
     </li>
     <li class="column facet-item">
       <refinement-list-dropdown :search-store="searchStore" attribute-name="contract_type.fr">
-        <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetRefinedCount }">
+        <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetsRefinedCount }">
           <span>Contrat</span>
-          <b-tag rounded class="is-primary" v-if="facetRefinedCount !== 0">
-            {{facetRefinedCount}}
+          <b-tag rounded class="is-primary" v-if="facetsRefinedCount !== 0">
+            {{facetsRefinedCount}}
           </b-tag>
           <b-icon icon="chevron-down"></b-icon>
         </h3>
       </refinement-list-dropdown>
     </li>
+    <li class="column facet-item">
+      <refinement-list-dropdown-list :search-store="searchStore" :facetGroups="professions">
+        <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetsRefinedCount }">
+          <span>Professions</span>
+          <b-tag rounded class="is-primary" v-if="facetsRefinedCount !== 0">
+            {{facetsRefinedCount}}
+          </b-tag>
+          <b-icon icon="chevron-down"></b-icon>
+        </h3>
+      </refinement-list-dropdown-list>
+    </li>
     <!--
-    <li class="column facet-item">
-      <h3 class="title is-size-6">Professions</h3>
-    </li>
-    <li class="column facet-item">
+      <li class="column facet-item">
       <h3 class="title is-size-6">Autres</h3>
-    </li>
+      </li>
     -->
   </ul>
 </template>
@@ -36,23 +44,39 @@
 <script>
 import { createJobsSearchStore } from '../api';
 import RefinementListDropdown from './ais/RefinementListDropdown';
+import RefinementListDropdownList from './ais/RefinementListDropdownList';
 
 const searchStore = createJobsSearchStore();
+
+const professions = {
+  name: 'profession',
+  facets: [
+    { name: 'admin', label: 'Admin' },
+    { name: 'business', label: 'Business' },
+    { name: 'consulting', label: 'Consulting' },
+    { name: 'design', label: 'Design' },
+    { name: 'finance', label: 'Finance' },
+    { name: 'marketing', label: 'Marketing' },
+    { name: 'retail', label: 'Retail' },
+    { name: 'tech', label: 'Tech' },
+  ],
+};
 
 export default {
   name: 'Search',
   components: {
     RefinementListDropdown,
+    RefinementListDropdownList,
   },
   data() {
     return {
       searchStore,
+      professions,
     };
   },
   mounted() {
     this.searchStore.start();
     this.searchStore.refresh();
-    console.log(this.searchStore);
   },
 };
 </script>
@@ -67,7 +91,7 @@ export default {
   text-align: center;
   padding: 0;
   height: 100%;
-  border-left: 1px solid #EEEEEE;
+  border-left: 1px solid #eee;
 }
 
 .facet-item h3 {
@@ -92,11 +116,15 @@ export default {
   vertical-align: middle;
 }
 
-.facet-item .dropdown-content {
+.facets-list {
   text-align: left;
 }
 
-.facet-item .control-label {
+.facets-list li {
+  padding: 8px 12px;
+}
+
+.facets-list li label {
   white-space: nowrap;
 }
 </style>

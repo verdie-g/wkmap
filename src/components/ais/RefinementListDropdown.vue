@@ -1,32 +1,39 @@
 <template>
   <b-dropdown>
     <template slot="trigger">
-      <slot name="trigger" v-bind:facetRefinedCount="facetRefinedCount">
+      <slot name="trigger" v-bind:facetsRefinedCount="facetsRefinedCount">
       </slot>
     </template>
 
-    <b-dropdown-item v-for="facet in facetValues" :key="facet.name" custom>
-      <b-checkbox v-model="facet.isRefined"
-                  :class="bem('label')"
-                  :native-value="facet.name"
-                  @input="toggleRefinement(facet)">
-        <slot :count="facet.count" :active="facet.isRefined" :value="facet.name">
-          <span :class="bem('value')">{{facet.name}}</span>
-          <b-tag rounded :class="bem('count')" class="is-primary">{{facet.count}}</b-tag>
-        </slot>
-      </b-checkbox>
-    </b-dropdown-item>
+    <b-refinement-list
+      :searchStore="searchStore"
+      :attribute-name="attributeName"
+      class="facets-list"
+      ref="refinementList">
+    </b-refinement-list>
   </b-dropdown>
 </template>
 
 <script>
-import { RefinementList } from 'vue-instantsearch';
+import BRefinementList from './BRefinementList';
 
 export default {
-  extends: RefinementList,
+  components: {
+    BRefinementList,
+  },
+  props: {
+    attributeName: {
+      type: String,
+      required: true,
+    },
+    searchStore: {
+      type: Object,
+      required: true,
+    },
+  },
   computed: {
-    facetRefinedCount() {
-      return this.facetValues.reduce((count, facet) => count + facet.isRefined, 0);
+    facetsRefinedCount() {
+      return 0;
     },
   },
 };
