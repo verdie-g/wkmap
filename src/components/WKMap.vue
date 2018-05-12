@@ -45,8 +45,8 @@ export default {
     return {
       zoom: 13,
       center: L.latLng(48.8566, 2.3522),
-      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+      attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       mapOptions: {
         zoomControl: false,
       },
