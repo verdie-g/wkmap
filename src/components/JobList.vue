@@ -2,29 +2,42 @@
   <ul v-if="sortedJobs.length !== 0" class="job-list">
     <li v-for="job in sortedJobs"
         :key="job.objectID"
-        class="job columns"
-        @click="selectJob(job)">
-      <div class="job-picture column is-narrow">
-        <img v-bind:src="job.company_logo_url" />
+        class="columns job">
+
+      <div class="column" @click="selectJob(job)">
+        <div class="columns">
+          <div class="job-picture column is-narrow">
+            <img v-bind:src="job.company_logo_url" />
+          </div>
+          <div class="job-header column">
+            <h5 class="title is-size-7 has-text-grey">{{job.company_name}}</h5>
+            <h4 class="title is-size-6">{{job.name}}</h4>
+            <ul class="job-metas list-inline is-size-7">
+              <li>
+                <b-icon icon="briefcase" size="is-small" />
+                  <span>{{job.contract_type.fr}}</span>
+              </li>
+              <li>
+                <b-icon icon="map-marker-outline" size="is-small" />
+                  <span>{{job.office_city}}</span>
+              </li>
+              <li>
+                <b-icon icon="clock" size="is-small" />
+                  <time>{{job.published_at | moment('from') }}</time>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="job-header column">
-        <h5 class="title is-size-7 has-text-grey">{{job.company_name}}</h5>
-        <h4 class="title is-size-6">{{job.name}}</h4>
-        <ul class="job-metas list-inline is-size-7">
-          <li>
-            <b-icon icon="briefcase" size="is-small" />
-              <span>{{job.contract_type.fr}}</span>
-          </li>
-          <li>
-            <b-icon icon="map-marker-outline" size="is-small" />
-              <span>{{job.office_city}}</span>
-          </li>
-          <li>
-            <b-icon icon="clock" size="is-small" />
-              <time>{{job.published_at | moment('from') }}</time>
-          </li>
-        </ul>
+
+      <div class="column is-narrow job-open">
+        <b-tooltip label="Voir le job sur welcometothejungle.co" position="is-left">
+          <a :href="wttjUrl(job)" target="_blank" class="is-size-4 is-black">
+            <b-icon icon="web" size="is-small" type="is-dark" />
+          </a>
+        </b-tooltip>
       </div>
+
     </li>
   </ul>
 </template>
@@ -46,6 +59,9 @@ export default {
   methods: {
     selectJob(job) {
       this.$root.$emit('select-job', job);
+    },
+    wttjUrl(job) {
+      return job.websites_urls.filter(j => j.website_reference === 'wttj_fr')[0].url;
     },
   },
 };
@@ -90,5 +106,14 @@ export default {
 
 .job-metas li {
   margin-right: 6px;
+}
+
+.job-open {
+  line-height: 60px;
+  visibility: hidden;
+}
+
+.job:hover .job-open {
+  visibility: visible;
 }
 </style>

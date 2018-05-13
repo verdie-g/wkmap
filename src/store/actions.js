@@ -26,7 +26,7 @@ export async function updateJobs({ commit, state }) {
       'name',
       'office_city',
       'published_at',
-      'websites_url',
+      'websites_urls',
     ],
     analytics: false,
   });
