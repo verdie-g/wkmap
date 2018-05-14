@@ -14,16 +14,16 @@
             <h4 class="title is-size-6">{{job.name}}</h4>
             <ul class="job-metas list-inline is-size-7">
               <li>
-                <b-icon icon="briefcase" size="is-small" />
-                  <span>{{job.contract_type.fr}}</span>
+                <b-icon icon="briefcase" size="is-small"></b-icon>
+                <span>{{job.contract_type.fr}}</span>
               </li>
               <li>
-                <b-icon icon="map-marker-outline" size="is-small" />
-                  <span>{{job.office_city}}</span>
+                <b-icon icon="map-marker-outline" size="is-small"></b-icon>
+                <span>{{job.office_city}}</span>
               </li>
               <li>
-                <b-icon icon="clock" size="is-small" />
-                  <time>{{job.published_at | moment('from') }}</time>
+                <b-icon icon="clock" size="is-small"></b-icon>
+                <time>{{job.published_at | moment('from') }}</time>
               </li>
             </ul>
           </div>
