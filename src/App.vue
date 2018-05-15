@@ -5,8 +5,9 @@
     </div>
 
     <div class="right">
-      <div class="top-panel">
-        <Search id="search" />
+      <div class="top-panel columns is-gapless">
+        <Search id="search" class="column" />
+        <Credits id="credits" class="column is-narrow" />
       </div>
       <WKMap id="map" v-on:mapMove="updateJobs" />
     </div>
@@ -40,7 +41,7 @@ export default {
 
 <style>
 html {
-  overflow-y: hidden;
+  overflow-y: unset;
 }
 
 html, body {
@@ -74,6 +75,12 @@ html, body {
 }
 
 #app {
+}
+
+#credits {
+  z-index: 1000;
+  background-color: #fff;
+  height: 60px;
 }
 
 #map {
