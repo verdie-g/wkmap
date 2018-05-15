@@ -2,7 +2,7 @@
   <ul v-if="sortedJobs.length !== 0" class="job-list">
     <li v-for="job in sortedJobs"
         :key="job.objectID"
-        class="columns job">
+        class="columns is-marginless job">
 
       <div class="column" @click="selectJob(job)">
         <div class="columns">

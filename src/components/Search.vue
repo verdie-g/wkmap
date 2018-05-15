@@ -1,44 +1,46 @@
 <template>
-  <ul class="search-facets columns">
-    <li class="column facet-item">
-      <refinement-list-dropdown :search-store="searchStore" attribute-name="universes.name">
-        <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetsRefinedCount }">
-          <span>Univers</span>
-          <b-tag rounded class="is-primary" v-if="facetsRefinedCount !== 0">
-            {{facetsRefinedCount}}
-          </b-tag>
-          <b-icon icon="chevron-down"></b-icon>
-        </h3>
-      </refinement-list-dropdown>
-    </li>
-    <li class="column facet-item">
-      <refinement-list-dropdown :search-store="searchStore" attribute-name="contract_type.fr">
-        <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetsRefinedCount }">
-          <span>Contrat</span>
-          <b-tag rounded class="is-primary" v-if="facetsRefinedCount !== 0">
-            {{facetsRefinedCount}}
-          </b-tag>
-          <b-icon icon="chevron-down"></b-icon>
-        </h3>
-      </refinement-list-dropdown>
-    </li>
-    <li class="column facet-item">
-      <refinement-list-dropdown-list :search-store="searchStore" :facetGroups="professions">
-        <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetsRefinedCount }">
-          <span>Professions</span>
-          <b-tag rounded class="is-primary" v-if="facetsRefinedCount !== 0">
-            {{facetsRefinedCount}}
-          </b-tag>
-          <b-icon icon="chevron-down"></b-icon>
-        </h3>
-      </refinement-list-dropdown-list>
-    </li>
-    <!--
+  <div>
+    <ul class="search-facets columns">
       <li class="column facet-item">
-      <h3 class="title is-size-6">Autres</h3>
+        <refinement-list-dropdown :search-store="searchStore" attribute-name="universes.name">
+          <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetsRefinedCount }">
+            <span>Univers</span>
+            <b-tag rounded class="is-primary" v-if="facetsRefinedCount !== 0">
+              {{facetsRefinedCount}}
+            </b-tag>
+            <b-icon icon="chevron-down"></b-icon>
+          </h3>
+        </refinement-list-dropdown>
       </li>
-    -->
-  </ul>
+      <li class="column facet-item">
+        <refinement-list-dropdown :search-store="searchStore" attribute-name="contract_type.fr">
+          <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetsRefinedCount }">
+            <span>Contrat</span>
+            <b-tag rounded class="is-primary" v-if="facetsRefinedCount !== 0">
+              {{facetsRefinedCount}}
+            </b-tag>
+            <b-icon icon="chevron-down"></b-icon>
+          </h3>
+        </refinement-list-dropdown>
+      </li>
+      <li class="column facet-item">
+        <refinement-list-dropdown-list :search-store="searchStore" :facetGroups="professions">
+          <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetsRefinedCount }">
+            <span>Professions</span>
+            <b-tag rounded class="is-primary" v-if="facetsRefinedCount !== 0">
+              {{facetsRefinedCount}}
+            </b-tag>
+            <b-icon icon="chevron-down"></b-icon>
+          </h3>
+        </refinement-list-dropdown-list>
+      </li>
+      <!--
+        <li class="column facet-item">
+        <h3 class="title is-size-6">Autres</h3>
+        </li>
+      -->
+    </ul>
+  </div>
 </template>
 
 <script>
