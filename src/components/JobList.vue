@@ -47,7 +47,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'JobList',
-  nbJobs: 20,
+  nbJobs: 30,
   computed: {
     ...mapGetters([
       'jobsSortedByDistance',
