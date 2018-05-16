@@ -24,7 +24,7 @@
         </refinement-list-dropdown>
       </li>
       <li class="column facet-item">
-        <refinement-list-dropdown-list :search-store="searchStore" :facetGroups="professions">
+        <refinement-list-dropdown-list :search-store="searchStore" :facetsGroups="professions">
           <h3 class="title is-size-6" slot="trigger" slot-scope="{ facetsRefinedCount }">
             <span>Professions</span>
             <b-tag rounded class="is-primary" v-if="facetsRefinedCount !== 0">

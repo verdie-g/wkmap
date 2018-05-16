@@ -9,7 +9,7 @@
       :searchStore="searchStore"
       :attribute-name="attributeName"
       class="facets-list"
-      ref="refinementList">
+      v-on:update:facetsRefinedCount="facetsRefinedCount = $event">
     </b-refinement-list>
   </b-dropdown>
 </template>
@@ -31,10 +31,10 @@ export default {
       required: true,
     },
   },
-  computed: {
-    facetsRefinedCount() {
-      return 0;
-    },
+  data() {
+    return {
+      facetsRefinedCount: 0,
+    };
   },
 };
 </script>

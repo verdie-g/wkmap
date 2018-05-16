@@ -8,17 +8,22 @@
     <b-tabs v-model="activeFacetsGroup">
       <b-tab-item>
         <ul class="facets-groups-index">
-          <li v-for="(facet, i) in facetGroups.facets"
+          <li v-for="(facet, i) in facetsGroups.facets"
               :key="facet.name"
               @click="activeFacetsGroup = i + 1">
-            <span>{{facet.label}}</span>
+            <span>
+              {{facet.label}}
+              <b-tag rounded class="is-primary" v-if="facetsRefinedCounts[i] !== 0">
+                {{facetsRefinedCounts[i]}}
+              </b-tag>
+            </span>
             <b-icon icon="chevron-right"></b-icon>
           </li>
         </ul>
       </b-tab-item>
 
       <b-tab-item
-        v-for="facet in facetGroups.facets"
+        v-for="(facet, i) in facetsGroups.facets"
         :key="facet.name"
         class="facets-group">
         <div class="facets-group-header" @click="activeFacetsGroup = 0">
@@ -26,9 +31,10 @@
           <b-icon icon="chevron-left"></b-icon>
         </div>
         <b-refinement-list
-          :attribute-name="`${facetGroups.name}.${facet.name}`"
+          :attribute-name="`${facetsGroups.name}.${facet.name}`"
           :search-store="searchStore"
-          class="facets-list">
+          class="facets-list"
+          v-on:update:facetsRefinedCount="updateFacetsRefinedCount($event, i)">
         </b-refinement-list>
       </b-tab-item>
     </b-tabs>
@@ -36,6 +42,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import BRefinementList from './BRefinementList';
 
 export default {
@@ -47,18 +54,25 @@ export default {
       type: Object,
       required: true,
     },
-    facetGroups: {
+    facetsGroups: {
       type: Object,
       required: true,
     },
   },
+  methods: {
+    updateFacetsRefinedCount(count, i) {
+      // this.facetsRefinedCounts[i] = count;
+      Vue.set(this.facetsRefinedCounts, i, count);
+    },
+  },
   computed: {
     facetsRefinedCount() {
-      return 0;
+      return this.facetsRefinedCounts.reduce((totalCount, count) => totalCount + count, 0);
     },
   },
   data() {
     return {
+      facetsRefinedCounts: Array(this.facetsGroups.facets.length).fill(0),
       activeFacetsGroup: 0,
     };
   },

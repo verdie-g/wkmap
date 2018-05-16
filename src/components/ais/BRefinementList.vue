@@ -4,7 +4,7 @@
       <b-checkbox v-model="facet.isRefined"
                   :class="bem('label')"
                   :native-value="facet.name"
-                  @input="toggleRefinement(facet)">
+                  @input="toggleRefinement(facet); emitFacetsRefinedCount()">
         <slot :count="facet.count" :active="facet.isRefined" :value="facet.name">
           <span :class="bem('value')">{{facet.name}}</span>
           <b-tag rounded :class="bem('count')" class="is-primary">{{facet.count}}</b-tag>
@@ -19,9 +19,10 @@ import { RefinementList } from 'vue-instantsearch';
 
 export default {
   extends: RefinementList,
-  computed: {
-    facetsRefinedCount() {
-      return this.facetValues.reduce((count, facet) => count + facet.isRefined, 0);
+  methods: {
+    emitFacetsRefinedCount() {
+      const refinedCount = this.facetValues.reduce((count, facet) => count + facet.isRefined, 0);
+      this.$emit('update:facetsRefinedCount', refinedCount);
     },
   },
 };
