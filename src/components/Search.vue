@@ -44,11 +44,9 @@
 </template>
 
 <script>
-import { createJobsSearchStore } from '../api';
 import RefinementListDropdown from './ais/RefinementListDropdown';
 import RefinementListDropdownList from './ais/RefinementListDropdownList';
-
-const searchStore = createJobsSearchStore();
+import jobsSearchStore from '../algolia/jobsSearchStore';
 
 const professions = {
   name: 'profession',
@@ -71,13 +69,11 @@ export default {
   },
   data() {
     return {
-      searchStore,
+      searchStore: jobsSearchStore.searchStore,
       professions,
     };
   },
   mounted() {
-    this.searchStore.start();
-    this.searchStore.refresh();
   },
 };
 </script>

@@ -2,14 +2,17 @@
   <l-map ref="map" :zoom="zoom" :center="center" :options="mapOptions" v-on:moveend="onMoveEnd">
     <l-tile-layer :url="url" :attribution="attribution" />
     <l-control-zoom position="bottomleft"></l-control-zoom>
-    <l-marker-cluster :options="clusterOptions" v-if="jobs.length !== 0">
-      <l-marker
-        v-for="job in jobs"
-        v-if="job._geoloc !== null"
-        :key="job.objectID"
-        :lat-lng="{ lat: job._geoloc.lat, lng: job._geoloc.lng }">
-        <l-popup :content="job.company_name + ': ' + job.name"></l-popup>
-      </l-marker>
+    <l-marker-cluster :options="clusterOptions" v-if="searchStore.results.length !== 0">
+      <ais-results :search-store="searchStore">
+        <template slot-scope="{ result }">
+          <l-marker
+            v-if="result._geoloc !== null"
+            :key="result.objectID"
+            :lat-lng="{ lat: result._geoloc.lat, lng: result._geoloc.lng }">
+            <l-popup :content="result.company_name + ': ' + result.name"></l-popup>
+          </l-marker>
+        </template>
+      </ais-results>
     </l-marker-cluster>
   </l-map>
 </template>
@@ -17,8 +20,9 @@
 <script>
 import L from 'leaflet';
 import { LMap, LTileLayer, LMarker, LPopup, LControlZoom } from 'vue2-leaflet';
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import LMarkerCluster from 'vue2-leaflet-markercluster';
+import jobsSearchStore from '../algolia/jobsSearchStore';
 import iconRetinaUrl from '../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from '../../node_modules/leaflet/dist/images/marker-icon.png';
 import shadowUrl from '../../node_modules/leaflet/dist/images/marker-shadow.png';
@@ -53,25 +57,18 @@ export default {
       clusterOptions: {
         maxClusterRadius: 25,
       },
+      searchStore: jobsSearchStore.searchStore,
     };
-  },
-  computed: {
-    ...mapState([
-      'jobs',
-    ]),
   },
   methods: {
     ...mapActions([
       'updateMapViewport',
     ]),
     onMoveEnd() {
-      this.emitMapMove();
-    },
-    emitMapMove() {
       const map = this.$refs.map.mapObject;
       const viewport = map.getBounds();
       this.updateMapViewport(viewport);
-      this.$emit('mapMove');
+      jobsSearchStore.setJobsBox(viewport);
     },
     zoomOnJob(job) {
       const map = this.$refs.map.mapObject;
@@ -91,7 +88,7 @@ export default {
     this.$root.$on('select-job', this.zoomOnJob);
   },
   mounted() {
-    this.emitMapMove();
+    this.onMoveEnd();
   },
   beforeDestroy() {
     this.$root.$off('select-job', this.zoomOnJob);

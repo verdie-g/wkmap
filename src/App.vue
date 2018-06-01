@@ -9,13 +9,12 @@
         <Search id="search" class="column" />
         <Credits id="credits" class="column is-narrow" />
       </div>
-      <WKMap id="map" v-on:mapMove="updateJobs" />
+      <WKMap id="map" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import Credits from './components/Credits';
 import JobList from './components/JobList';
 import Search from './components/Search';
@@ -32,9 +31,6 @@ export default {
   computed: {
   },
   methods: {
-    ...mapActions([
-      'updateJobs',
-    ]),
   },
 };
 </script>

@@ -4,7 +4,7 @@ import Buefy from 'buefy';
 import Vue from 'vue';
 import VueMoment from 'vue-moment';
 import Vuex from 'vuex';
-import { RefinementList } from 'vue-instantsearch';
+import { RefinementList, Results } from 'vue-instantsearch';
 
 import App from './App';
 import store from './store/index';
@@ -14,6 +14,7 @@ Vue.use(VueMoment);
 Vue.use(Vuex);
 
 Vue.component('ais-refinement-list', RefinementList);
+Vue.component('ais-results', Results);
 
 Vue.config.productionTip = false;
 

@@ -43,17 +43,36 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
+import jobsSearchStore from '../algolia/jobsSearchStore';
+import { sortByDistance } from '../helpers/GeoHelper';
 
 export default {
   name: 'JobList',
   nbJobs: 30,
+  data() {
+    return {
+      jobsSearchStore,
+      searchStore: jobsSearchStore.searchStore,
+    };
+  },
   computed: {
+    ...mapState([
+      'mapViewport',
+    ]),
     ...mapGetters([
-      'jobsSortedByDistance',
+      'mapCenter',
     ]),
     sortedJobs() {
-      return this.jobsSortedByDistance.slice(0, this.$options.nbJobs);
+      const viewportJobs = this.jobsSearchStore.getFilteredJobs(j =>
+        this.mapViewport.contains(j._geoloc));
+
+      if (viewportJobs.length === 0) {
+        return viewportJobs;
+      }
+
+      return sortByDistance(this.mapCenter, viewportJobs, j => j._geoloc)
+        .slice(0, this.$options.nbJobs);
     },
   },
   methods: {

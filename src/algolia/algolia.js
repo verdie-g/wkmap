@@ -14,8 +14,7 @@ function createSearchStore(indexName) {
   return searchStore;
 }
 
-export const jobsIndex = client.initIndex(jobsIndexName);
-
-export function createJobsSearchStore() {
-  return createSearchStore(jobsIndexName);
-}
+export {
+  jobsIndexName,
+  createSearchStore,
+};
