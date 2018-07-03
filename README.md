@@ -21,8 +21,8 @@ yarn build
 
 ## Todo
 - Sort by distance from center or by published_at
-- Search filters
 - Find good colors for marker clusters
+- Open job popup on marker hover
 
 ## Check
 - leaflet marker cluster mutates geoloc ?
