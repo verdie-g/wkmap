@@ -9,6 +9,7 @@
             v-if="result._geoloc !== null"
             :key="result.objectID"
             :lat-lng="{ lat: result._geoloc.lat, lng: result._geoloc.lng }"
+            @click="openPopup(result)"
             @mouseover="openPopup(result)"
             @mouseleave="closePopup()" />
         </template>
@@ -70,6 +71,7 @@ export default {
     openPopup(job) {
       const latLng = L.latLng(job._geoloc.lat, job._geoloc.lng);
       const map = this.$refs.map.mapObject;
+
       this.popup
         .setLatLng(latLng)
         .setContent(`<div class="job-popup"></div><h3 class="is-size-6">${job.company_name}</h3><h4 class="is-size-7">${job.name}</h4></div>`)
@@ -100,12 +102,16 @@ export default {
   },
   created() {
     this.$root.$on('select-job', this.zoomOnJob);
+    this.$root.$on('over-job', job => this.openPopup(job));
+    this.$root.$on('leave-job', this.closePopup);
   },
   mounted() {
     this.onMoveEnd();
   },
   beforeDestroy() {
     this.$root.$off('select-job', this.zoomOnJob);
+    this.$root.$off('over-job', this.zoomOnJob);
+    this.$root.$off('leave-job', this.zoomOnJob);
   },
 };
 </script>

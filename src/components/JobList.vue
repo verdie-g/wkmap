@@ -4,7 +4,10 @@
         :key="job.objectID"
         class="columns is-marginless job">
 
-      <div class="column" @click="selectJob(job)">
+      <div class="column"
+        @click="selectJob(job)"
+        @mouseover="onJobOver(job)"
+        @mouseleave="onJobLeave(job)">
         <div class="columns">
           <div class="job-picture column is-narrow">
             <img v-bind:src="job.company_logo_url" />
@@ -78,6 +81,12 @@ export default {
   methods: {
     selectJob(job) {
       this.$root.$emit('select-job', job);
+    },
+    onJobOver(job) {
+      this.$root.$emit('over-job', job);
+    },
+    onJobLeave(job) {
+      this.$root.$emit('leave-job', job);
     },
     wttjUrl(job) {
       return job.websites_urls.filter(j => j.website_reference === 'wttj_fr')[0].url;
