@@ -8,9 +8,9 @@
           <l-marker
             v-if="result._geoloc !== null"
             :key="result.objectID"
-            :lat-lng="{ lat: result._geoloc.lat, lng: result._geoloc.lng }">
-            <l-popup :content="result.company_name + ': ' + result.name"></l-popup>
-          </l-marker>
+            :lat-lng="{ lat: result._geoloc.lat, lng: result._geoloc.lng }"
+            @mouseover="openPopup(result)"
+            @mouseleave="closePopup()" />
         </template>
       </ais-results>
     </l-marker-cluster>
@@ -58,12 +58,26 @@ export default {
         maxClusterRadius: 25,
       },
       searchStore: jobsSearchStore.searchStore,
+      popup: L.popup({
+        offset: L.point(0, -30),
+      }),
     };
   },
   methods: {
     ...mapActions([
       'updateMapViewport',
     ]),
+    openPopup(job) {
+      const latLng = L.latLng(job._geoloc.lat, job._geoloc.lng);
+      const map = this.$refs.map.mapObject;
+      this.popup
+        .setLatLng(latLng)
+        .setContent(`<div class="job-popup"></div><h3 class="is-size-6">${job.company_name}</h3><h4 class="is-size-7">${job.name}</h4></div>`)
+        .openOn(map);
+    },
+    closePopup() {
+      this.popup.remove();
+    },
     onMoveEnd() {
       const map = this.$refs.map.mapObject;
       const viewport = map.getBounds();
