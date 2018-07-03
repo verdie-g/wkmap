@@ -106,6 +106,7 @@ export default {
 
 .job-picture img {
   height: 66px;
+  width: 66px;
 }
 
 .job-header {
