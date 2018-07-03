@@ -89,4 +89,19 @@ html, body {
 ul.list-inline li {
   display: inline-block;
 }
+
+@media (max-width: 576px) {
+  .left-panel {
+    display: none;
+  }
+
+  .right {
+    width: 100%;
+    left: 0;
+  }
+
+  #credits {
+    display: none;
+  }
+}
 </style>
